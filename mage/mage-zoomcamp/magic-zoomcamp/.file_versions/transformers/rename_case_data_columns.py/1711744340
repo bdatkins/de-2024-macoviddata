@@ -1,0 +1,46 @@
+if 'transformer' not in globals():
+    from mage_ai.data_preparation.decorators import transformer
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@transformer
+def transform(data, *args, **kwargs):
+
+    case_dtypes = {
+       'Confirmed deaths' : pd.Int64Dtype(),
+       'Probable deaths' : pd.Int64Dtype(),
+       'Confirmed and probable deaths' : pd.Int64Dtype(),
+       'Confirmed cases' : pd.Int64Dtype(),
+       'Probable cases' : pd.Int64Dtype(),
+       'Confirmed and probable cases' : pd.Int64Dtype()
+    }
+
+    parse_dates = ['Week Start Date', 'Week End Date', 'Last updated']
+    
+    data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+
+
+   data.rename(columns = {
+       "VendorID": "vendor_id",
+       "RatecodeID" : "rate_code_id",
+       "PULocationID" : "pu_location_id",
+       "DOLocationID" : "do_location_id",
+   }, inplace=True)
+
+
+ data.columns = (data.columns
+                       .str.replace(' ', '_')
+                       .str.lower()
+   )
+
+
+    return data
+
+
+@test
+def test_output(output, *args) -> None:
+    """
+    Template code for testing the output of the block.
+    """
+    assert output is not None, 'The output is undefined'

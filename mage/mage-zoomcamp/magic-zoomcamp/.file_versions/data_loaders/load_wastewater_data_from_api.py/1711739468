@@ -1,0 +1,44 @@
+import io
+import pandas as pd
+import requests
+if 'data_loader' not in globals():
+    from mage_ai.data_preparation.decorators import data_loader
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@data_loader
+def load_data_from_api(*args, **kwargs):
+    'MA Wastewater Case Data'
+    url = 'https://www.mass.gov/media/2642316/download'
+
+    wastewater_dtypes = {
+       'Tester' : str,
+       'Site type' : str,
+       'Name of Sampling Location' : str,
+       '7 day average of SARS-CoV-2 concentration' : float,
+       'Number of samples in the last 7 days' : pd.Int64Dtype(),
+       'SARS-CoV-2 Detected' : str,
+       'Units (measuring concentration)' : str,
+       'City of sampling location' : str,
+       'State of sampling location' : str,
+       'County of sampling location' : str,
+       'mta_tax' : float,
+       'tip_amount' : float,
+       'tolls_amount' : float,
+       'improvement_surcharge' : float,
+       'total_amount' : float,
+       'congestion_surcharge' : float
+   }
+
+Date data last updated
+   Sample collection date
+' pd.Int64Dtype()'
+    return pd.read_excel(url, 'Wastewater Testing Data', dtype=wastewater_dtypes)
+
+@test
+def test_output(output, *args) -> None:
+    """
+    Template code for testing the output of the block.
+    """
+    assert output is not None, 'The output is undefined'

@@ -1,0 +1,1 @@
+{"Unnamed:_0": "Int64", "Week_Start_Date": "str", "Week_End_Date": "str", "Confirmed_deaths": "Int64", "Probable_deaths": "Int64", "Confirmed_and_probable_deaths": "Int64", "Confirmed_cases": "Int64", "Probable_cases": "Int64", "Confirmed_and_probable_cases": "Int64", "Last_updated": "str"}

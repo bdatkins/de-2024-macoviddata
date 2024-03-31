@@ -1,0 +1,23 @@
+from mage_ai.services.dbt.dbt import DbtCloudClient
+
+
+@custom
+def transform_custom(*args, **kwargs):
+    """
+    Ca
+    """
+    client = DbtCloudClient(dict(account_id=244343, api_token='dbtc_zwrNCKoDiqd7fVOr-Sf5eXK3O9TCAyfY8kTMDnMuRGWtgB_jvQ'))
+
+    # Set poll_status=True to wait for job completion.
+    # Set poll_status=False to not wait for job completion.
+    client.trigger_job_run(563528, poll_status=True)
+
+    return {}
+
+
+@test
+def test_output(output, *args) -> None:
+    """
+    Template code for testing the output of the block.
+    """
+    assert output is not None, 'The output is undefined'

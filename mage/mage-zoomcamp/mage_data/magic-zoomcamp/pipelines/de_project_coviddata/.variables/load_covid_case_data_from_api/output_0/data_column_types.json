@@ -1,0 +1,1 @@
+{"Week Start Date": "datetime64[ns]", "Week End Date": "datetime64[ns]", "Confirmed deaths": "Int64", "Probable deaths": "Int64", "Confirmed and probable deaths": "Int64", "Confirmed cases": "Int64", "Probable cases": "Int64", "Confirmed and probable cases": "Int64", "Last updated": "datetime64[ns]"}

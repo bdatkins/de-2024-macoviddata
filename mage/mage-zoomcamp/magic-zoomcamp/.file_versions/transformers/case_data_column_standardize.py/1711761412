@@ -1,0 +1,31 @@
+if 'transformer' not in globals():
+    from mage_ai.data_preparation.decorators import transformer
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@transformer
+def transform(data, *args, **kwargs):
+    """
+    Standardize columnn names
+    """
+    data.columns = (data.columns
+                       .str.replace(' ', '_')
+                       .str.lower())
+
+
+    'Change data type of date fields'
+    data['week_start_date'] = data['week_start_date'].dt.date
+
+
+        parse_dates = ['', 'Week End Date', 'Last updated']
+
+
+    data.rename(columns = {
+       "": "id"})
+
+    return data
+
+@test
+def test_output(output, *args) -> None:
+    assert output is not None, 'The output is undefined'

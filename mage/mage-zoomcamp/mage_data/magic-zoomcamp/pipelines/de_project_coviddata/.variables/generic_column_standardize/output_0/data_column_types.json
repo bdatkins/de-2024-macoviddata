@@ -1,0 +1,1 @@
+{"week_start_date": "str", "confirmed_deaths": "int64", "probable_deaths": "int64", "confirmed_and_probable_deaths": "int64", "confirmed_cases": "int64", "probable_cases": "int64", "confirmed_and_probable_cases": "int64", "last_updated": "str"}
