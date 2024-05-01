@@ -1,0 +1,21 @@
+sources:
+- description: Dataframes Mage upstream blocks
+  loader: mage
+  name: mage_de_ma_covid_data
+  schema: covid_data
+  tables:
+  - description: Dataframe for block `export_case_data_to_bigquery_py` of the `de_project_coviddata`
+      mage pipeline.
+    identifier: mage_de_project_coviddata_export_case_data_to_bigquery_py
+    meta:
+      block_uuid: export_case_data_to_bigquery_py
+      pipeline_uuid: de_project_coviddata
+    name: de_project_coviddata_export_case_data_to_bigquery_py
+  - description: Dataframe for block `export_wastewater_data_to_big_query_py` of the
+      `de_project_coviddata` mage pipeline.
+    identifier: mage_de_project_coviddata_export_wastewater_data_to_big_query_py
+    meta:
+      block_uuid: export_wastewater_data_to_big_query_py
+      pipeline_uuid: de_project_coviddata
+    name: de_project_coviddata_export_wastewater_data_to_big_query_py
+version: 2
