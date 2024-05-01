@@ -1,0 +1,48 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mage
+.file_versions
+.gitkeep
+.log
+.logs/
+.preferences.yaml
+.variables/
+__pycache__/
+docker-compose.override.yml
+logs/
+log/
+mage-ai.db
+mage_data/
+secrets/
+.vscode/settings.json
+# io_config.yaml
+.mage_temp_profiles/
+*/.ssh_tunnel
+
+# MacOS
+.DS_Store
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform/terraform.tfstate.backup
+terraform/terraform.tfstate
+/de_project_coviddata/.profiles_interpolated_temp_3513ef6d-4118-4fb6-a9d8-d3705e4e4f48
+/de_project_coviddata/.profiles_interpolated_temp_39b015a9-7cb8-4914-92ae-12ae41652bae
+de_project_coviddata/.profiles_interpolated_temp_4cfb1eba-2ef5-4872-879c-ba1361d78d78/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_571a631b-fa8b-4f60-a143-8044a48b190e/.user.yml
+de_project_coviddata/.profiles_interpolated_temp_571a631b-fa8b-4f60-a143-8044a48b190e/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_57e0813e-dcb5-4ed1-b6d2-101c394e507f/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_75441fd1-27ba-42fb-8b41-f46b60f8a951/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_848105a2-9123-4782-bd65-6c4d71feab36/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_9047ed23-ecf4-46d1-aca6-c3555d96636c/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_b0210b32-513a-4d3a-ac26-2ed32999ab59/profiles.yml
+de_project_coviddata/.profiles_interpolated_temp_e5ca7b46-40a8-4f78-b07e-355ce9e0855d/profiles.yml
+/Installation directory (this will create a google-cloud-sdk subdirectory) /Users/barbaraatkins install_dir/google-cloud-sdk

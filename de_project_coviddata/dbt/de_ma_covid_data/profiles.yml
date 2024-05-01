@@ -1,0 +1,10 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: covid_data
+      threads: 1 # Must be a value of 1 or greater
+      keyfile: /home/src/keys/gcp-creds.json

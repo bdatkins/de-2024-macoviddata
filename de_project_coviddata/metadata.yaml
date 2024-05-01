@@ -1,0 +1,19 @@
+project_type: standalone
+
+variables_dir: /home/src/de_project_coviddata/mage_data
+
+variables_retention_period: '90d'
+
+notification_config:
+  alert_on:
+  - trigger_failure
+  - trigger_passed_sla
+  slack_config:
+    webhook_url: "{{ env_var('MAGE_SLACK_WEBHOOK_URL') }}"
+  teams_config:
+    webhook_url: "{{ env_var('MAGE_TEAMS_WEBHOOK_URL') }}"
+project_uuid: a222224a52d042c08ee5d5d34d870b1d
+help_improve_mage: true
+features:
+  command_center: true
+pipelines:

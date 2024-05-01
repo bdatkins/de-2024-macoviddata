@@ -1,0 +1,27 @@
+services:
+  mage:
+    build:
+      context: devops/mage
+      dockerfile: Dockerfile
+      args:
+        PIPENVFILE: requirements.txt
+    image: bdatkinsdev/de_project_coviddata
+    stdin_open: true # docker run -i
+    env_file:
+      - .env
+    volumes:
+      ## Mount docker host directory to the container (i.e. current directory)
+      - .:/home/src
+    ports:
+      - "127.0.0.1:6789:6789" # mage
+      - "127.0.0.1:8080:8080" # dbt docs
+    networks:
+      - magic-network
+    deploy:
+      resources:
+        limits:
+          memory: 5000M
+
+networks:
+  magic-network:
+    driver: bridge

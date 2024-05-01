@@ -1,0 +1,303 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_case_data_to_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_covid_case_data_from_api
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_covid_case_data_from_api
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_wastewater_data_to_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_wastewater_data_from_api
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_wastewater_data_from_api
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - get_case_data_from_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_case_data_to_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_covid_case_data_from_api
+  uuid: export_case_data_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - get_wastewater_data_from_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_wastewater_data_to_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_wastewater_data_from_api
+  uuid: export_wastewater_data_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - case_data_column_standardize
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: get_case_data_from_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks:
+  - export_case_data_to_gcs
+  uuid: get_case_data_from_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_database: dtc-de-ma-covid-data
+    data_provider_profile: default
+    data_provider_schema: covid_data
+    export_write_policy: replace
+  downstream_blocks:
+  - wastewater_data_column_standardize
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: get_wastewater_data_from_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks:
+  - export_wastewater_data_to_gcs
+  uuid: get_wastewater_data_from_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dbt/de_ma_covid_data/models/staging/stg_staging__case_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_case_data_to_bigquery_py
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - case_data_column_standardize
+  uuid: export_case_data_to_bigquery_py
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_wastewater_data_to_big_query_py
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - wastewater_data_column_standardize
+  uuid: export_wastewater_data_to_big_query_py
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_case_data_to_bigquery_py
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: case_data_column_standardize
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - get_case_data_from_gcs
+  uuid: case_data_column_standardize
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_wastewater_data_to_big_query_py
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: wastewater_data_column_standardize
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - get_wastewater_data_from_gcs
+  uuid: wastewater_data_column_standardize
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt_project_name: dbt/de_ma_covid_data
+    file_path: dbt/de_ma_covid_data/models/staging/stg_staging__case_data.sql
+    file_source:
+      path: dbt/de_ma_covid_data/models/staging/stg_staging__case_data.sql
+      project_path: dbt/de_ma_covid_data
+    limit: 1000
+  downstream_blocks:
+  - dbt/de_ma_covid_data/models/core/fact_cases
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/de_ma_covid_data/models/staging/stg_staging__case_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - export_case_data_to_bigquery_py
+  uuid: dbt/de_ma_covid_data/models/staging/stg_staging__case_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt_project_name: dbt/de_ma_covid_data
+    file_path: dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data.sql
+    file_source:
+      path: dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data.sql
+      project_path: dbt/de_ma_covid_data
+    limit: 1000
+  downstream_blocks:
+  - dbt/de_ma_covid_data/models/core/fact_wastewater
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - export_wastewater_data_to_big_query_py
+  uuid: dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt_project_name: dbt/de_ma_covid_data
+    file_path: dbt/de_ma_covid_data/models/core/fact_cases.sql
+    file_source:
+      path: dbt/de_ma_covid_data/models/core/fact_cases.sql
+      project_path: dbt/de_ma_covid_data
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/de_ma_covid_data/models/core/fact_cases
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/de_ma_covid_data/models/staging/stg_staging__case_data
+  uuid: dbt/de_ma_covid_data/models/core/fact_cases
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt_project_name: dbt/de_ma_covid_data
+    file_path: dbt/de_ma_covid_data/models/core/fact_wastewater.sql
+    file_source:
+      path: dbt/de_ma_covid_data/models/core/fact_wastewater.sql
+      project_path: dbt/de_ma_covid_data
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/de_ma_covid_data/models/core/fact_wastewater
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/de_ma_covid_data/models/staging/stg_staging__wastewater_data
+  uuid: dbt/de_ma_covid_data/models/core/fact_wastewater
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: data_type_checker
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: conditional
+  upstream_blocks: []
+  uuid: data_type_checker
+created_at: '2024-03-24 20:12:51.724887+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: de_project_coviddata
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: de_project_coviddata
+variables_dir: /home/src/mage_data/de_project_coviddata
+widgets: []
